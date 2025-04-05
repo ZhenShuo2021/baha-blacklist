@@ -4,5 +4,6 @@ certifi==2025.1.31        # via curl-cffi
 cffi==1.17.1              # via curl-cffi
 colorama==0.4.6           # via baha-blacklist (pyproject.toml)
 curl-cffi==0.10.0         # via baha-blacklist (pyproject.toml)
-lxml==5.3.1               # via baha-blacklist (pyproject.toml)
+lxml==5.3.2               # via baha-blacklist (pyproject.toml)
 pycparser==2.22           # via cffi
+python-dotenv==1.1.0      # via baha-blacklist (pyproject.toml)

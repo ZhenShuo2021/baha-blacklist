@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: baha_blacklist",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+
+      "justMyCode": true,
+      "module": "baha_blacklist",
+      "args": ["--mode", "export", "--cookies-first", "-v"]
+    }
+  ]
+}

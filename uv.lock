@@ -28,6 +28,7 @@ dependencies = [
     { name = "colorama" },
     { name = "curl-cffi" },
     { name = "lxml" },
+    { name = "python-dotenv" },
 ]
 
 [package.dev-dependencies]
@@ -38,7 +39,6 @@ dev = [
     { name = "pre-commit" },
     { name = "pyperclip" },
     { name = "pytest" },
-    { name = "python-dotenv" },
     { name = "ruff" },
 ]
 
@@ -47,6 +47,7 @@ requires-dist = [
     { name = "colorama", specifier = ">=0.4.6" },
     { name = "curl-cffi", specifier = ">=0.8.0b7" },
     { name = "lxml", specifier = ">=5.3.0" },
+    { name = "python-dotenv", specifier = ">=1.0.1" },
 ]
 
 [package.metadata.requires-dev]
@@ -57,7 +58,6 @@ dev = [
     { name = "pre-commit", specifier = ">=4.0.0" },
     { name = "pyperclip", specifier = ">=1.9.0" },
     { name = "pytest", specifier = ">=8.3.4" },
-    { name = "python-dotenv", specifier = ">=1.0.1" },
     { name = "ruff", specifier = ">=0.7.1" },
 ]
 

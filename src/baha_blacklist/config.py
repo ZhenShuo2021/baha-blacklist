@@ -8,6 +8,7 @@ from typing import Any
 from curl_cffi.requests.impersonate import BrowserTypeLiteral
 
 logger = logging.getLogger()
+BLACKLIST_SRC = "https://github.com/ZhenShuo2021/baha-blacklist/raw/refs/heads/main/blacklist.txt"
 
 
 @dataclass
@@ -15,11 +16,9 @@ class Config:
     account: str = "your account here"
     password: str = ""
     cookie_path: str = "./cookies.txt"
-    cookies_first: bool = False
+    cookies_first: bool = False  # The argparse controls the default value
     blacklist_dest: str = "./blacklist.txt"
-    blacklist_src: str = (
-        "https://github.com/ZhenShuo2021/baha-blacklist/raw/refs/heads/main/blacklist.txt"
-    )
+    blacklist_src: str = BLACKLIST_SRC
     min_sleep: int | float = 1.0
     max_sleep: int | float = 10.0
     min_visit: int = 5
@@ -30,7 +29,7 @@ class Config:
 
     def validate(self) -> None:
         # 別忘了修改 actions.py
-        if self.account == "your account here":
+        if not self.cookies_first and self.account == "your account here":
             raise ValueError(
                 "未設定使用者帳號，請使用 -u 參數設定帳號名稱或到 config.json 修改預設值"
             )
@@ -85,14 +84,14 @@ class ConfigLoader:
             args = vars(args)
         return args
 
-    def load_from_env(self) -> dict[str, Any]:
+    def load_from_env(self, var_map: dict[str, str] | None = None) -> dict[str, Any]:
         """只讀取特定的環境變數
 
         Returns:
             dict[str, Any]: 將被載入到 Config 中的設定值
         """
         logger.debug("開始從環境變數載入設定")
-        env_var_map = {
+        env_var_map = var_map or {
             "BAHA_ACCOUNT": "account",
             "BAHA_PASSWORD": "password",
         }
@@ -112,7 +111,7 @@ class ConfigLoader:
             for key, value in config.items():
                 # 不在合法的 key 中
                 if key not in valid_keys:
-                    logger.debug(f"跳過由 {source_name} 不支援的設定類型: {key}")
+                    logger.debug(f"跳過不支援的 {key} 設定，由 {source_name} 提供")
                     continue
 
                 # 在合法的 key 中

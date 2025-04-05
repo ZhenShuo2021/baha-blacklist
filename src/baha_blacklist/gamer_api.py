@@ -6,6 +6,7 @@ import re
 import time
 from dataclasses import dataclass
 from datetime import datetime
+from pathlib import Path
 from typing import Any
 
 from curl_cffi import requests
@@ -55,14 +56,26 @@ class GamerLogin:
         return False
 
     def login_cookies(self) -> bool:
-        cookie_jar = cookiejar.MozillaCookieJar(self.config.cookie_path)
+        cp = Path(self.config.cookie_path)
+        logger.debug(f"正在嘗試使用 Cookies 登入，檔案路徑 {cp.absolute()}")
+        if not cp.is_file():
+            logger.warning(f"Cookies 登入失敗，{cp.absolute()} 不存在")
+            return False
+
+        cookie_jar = cookiejar.MozillaCookieJar(str(cp))
         cookie_jar.load()
         self.session.cookies.update({c.name: c.value for c in cookie_jar if c.value})
-        return self.login_success()
+
+        if self.login_success():
+            return True
+        else:
+            self.session.cookies.clear()
+            return False
 
     def login_password(self) -> bool:
+        logger.debug("正在嘗試使用密碼登入")
         if not self.config.password:
-            self.logger.debug("未提供密碼，跳過密碼登入流程")
+            self.logger.info("未提供密碼，跳過密碼登入流程")
             return False
 
         fake_cookie = {"_ga": "GA1.1.135792468.2468013579"}
