@@ -22,22 +22,22 @@ https://github.com/user-attachments/assets/43bf36fa-8c4d-429c-a5f0-22c3fd7e6512
 
 下載腳本後
 
-1. 使用 `pip install -r requirements.txt` 安裝
-2. 使用 `python run.py` 執行，使用範例如下
+1. [安裝 uv](https://docs.astral.sh/uv/getting-started/installation/)，很輕量只有 30MB
+2. 移動到專案目錄 `cd BAHA-blacklist`
+3. 執行腳本
 
 ```sh
-python run.py -a <帳號> -p <密碼>
+uv run baha-blacklist -a <帳號> -p <密碼>
 ```
 
-如果什麼都不輸入預設的三種功能都會執行，使用 `-h` 參數可以看到所有輸入選項。
+預設三種功能都會執行，使用 `-h` 參數可以看到所有輸入選項。修改 config.json 就可以從中讀取設定檔，不再需要在命令行輸入帳號密碼。
 
 ## 注意事項
 
-1. 修改 config.json 就可以從中讀取設定檔，不再需要在命令行輸入參數
-2. Cookies 登入方式是使用 [Cookie-Editor](https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm) 匯出 netscape 格式的 cookie 並且儲存到同資料夾的 `cookies.txt`。根據 [aniGamerPlus](https://github.com/miyouzi/aniGamerPlus) 的建議可以使用無痕瀏覽器登入巴哈以取得程式碼專用的 cookies。
-3. 遇到登入問題可以嘗試更新 cookie 檔案或者是修改 `user_agent`：到 [whatsmyua](https://www.whatsmyua.info/) 取得 `user_agent` 後複製到 `config.json`，並且修改 config.json 中的 browser 版本，在兩者版盡量相同最好，browser 可用版本請見[支援的瀏覽器清單](https://curl-cffi.readthedocs.io/en/latest/impersonate.html)。
-4. 等待時間久一點讓他慢慢跑沒關係，設定太快對網站來說是攻擊，帳號可能會被 ban。
-5. 黑名單來源 `blacklist_src` 預設根據[我的黑名單](https://github.com/ZhenShuo2021/baha-blacklist/blob/main/blacklist.txt)更新，已經 ban 了很多碎念大師和暴雷哥，也可以用你找到的黑名單列表進行更新，只要格式是一行一個的文字檔就可以使用。
+1. Cookies 登入方式是使用 [Cookie-Editor](https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm) 匯出 netscape 格式的 cookie 並且儲存到同資料夾的 `cookies.txt`。根據 [aniGamerPlus](https://github.com/miyouzi/aniGamerPlus) 的建議可以使用無痕瀏覽器登入巴哈以取得程式碼專用的 cookies。
+2. 遇到登入問題可以嘗試更新 cookie 檔案或者是修改 `user_agent`：到 [whatsmyua](https://www.whatsmyua.info/) 取得 `user_agent` 後複製到 `config.json`，並且修改 config.json 中的 browser 版本，在兩者版盡量相同最好，browser 可用版本請見[支援的瀏覽器清單](https://curl-cffi.readthedocs.io/en/latest/impersonate.html)。
+3. 等待時間久一點讓他慢慢跑沒關係，設定太快對網站來說是攻擊，帳號可能會被 ban。
+4. 黑名單來源 `blacklist_src` 預設根據[我的黑名單](https://github.com/ZhenShuo2021/baha-blacklist/blob/main/blacklist.txt)更新，已經 ban 了很多碎念大師和暴雷哥，也可以用你找到的黑名單列表進行更新，只要格式是一行一個的文字檔就可以使用。
 
 # Disclaimer
 

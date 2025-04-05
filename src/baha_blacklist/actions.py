@@ -3,9 +3,9 @@ import logging
 import os
 import sys
 
-from .config import Config, ConfigLoader
-from .gamer_api import GamerAPIExtended
-from .utils import decode_base64, encode_base64, write_users
+from baha_blacklist.config import Config, ConfigLoader
+from baha_blacklist.gamer_api import GamerAPIExtended
+from baha_blacklist.utils import decode_base64, encode_base64, write_users
 
 
 def cookies_to_base64(

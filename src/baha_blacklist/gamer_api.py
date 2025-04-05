@@ -12,8 +12,8 @@ from curl_cffi import requests
 from curl_cffi.requests.exceptions import RequestException
 from lxml import html
 
-from .config import Config
-from .utils import count_success, decode_response_dict, get_default_user_info
+from baha_blacklist.config import Config
+from baha_blacklist.utils import count_success, decode_response_dict, get_default_user_info
 
 logger = logging.getLogger("baha_blacklist")
 logger_time_fmt = "%Y-%m-%d"

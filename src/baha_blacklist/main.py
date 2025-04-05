@@ -7,10 +7,10 @@ from pathlib import Path
 from curl_cffi.requests.exceptions import RequestException
 from dotenv import load_dotenv
 
-from .config import Config, ConfigLoader
-from .gamer_api import GamerAPIExtended
-from .logger import setup_logging
-from .utils import load_users, write_users
+from baha_blacklist.config import Config, ConfigLoader
+from baha_blacklist.gamer_api import GamerAPIExtended
+from baha_blacklist.logger import setup_logging
+from baha_blacklist.utils import load_users, parse_arguments, write_users
 
 load_dotenv()
 logger = logging.getLogger("baha_blacklist")
@@ -24,7 +24,7 @@ def init_app(args: Namespace, config_name: str = "config.json") -> tuple[Config,
         loglevel = logging.WARNING
 
     setup_logging(loglevel)
-    json_path = str(Path(__file__).parents[1] / config_name)
+    json_path = str(Path(__file__).parents[2] / config_name)
     config_loader = ConfigLoader(Config())
     config = config_loader.load_config(json_path, args)
 
@@ -69,7 +69,9 @@ def real_main(args: Namespace, config: Config, api: GamerAPIExtended) -> int:
     return 0
 
 
-def main(args: Namespace, config_name: str = "config.json") -> int:
+def main(args: Namespace | None = None, config_name: str = "config.json") -> int:
+    if args is None:
+        args = parse_arguments()
     try:
         config, api = init_app(args, config_name)
         return real_main(args, config, api)

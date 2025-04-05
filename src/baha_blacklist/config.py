@@ -61,15 +61,22 @@ class ConfigLoader:
         return final_config
 
     def load_from_json(self, file_path: str | None) -> dict[str, Any]:
-        if file_path and os.path.exists(file_path):
-            logger.debug(f"開始從 JSON 文件載入設定：{file_path}")
-            with open(file_path) as file:
-                try:
-                    return json.load(file)
-                except json.JSONDecodeError as e:
-                    logger.error(f"{file_path} 中的 JSON 格式無效：{e}")
-                    raise ValueError(f"{file_path} 中的 JSON 格式無效：{e}")
-        logger.warning("未提供 JSON 設定檔或檔案不存在")
+        if file_path:
+            file_path = os.path.abspath(file_path)
+            if os.path.exists(file_path):
+                logger.debug(f"開始從 JSON 文件載入設定：{file_path}")
+                with open(file_path) as file:
+                    try:
+                        return json.load(file)
+                    except json.JSONDecodeError as e:
+                        logger.error(f"讀取 {file_path} 的 JSON 失敗：{e}")
+                        raise ValueError(f"讀取 {file_path} 的 JSON 失敗：{e}")
+            else:
+                logger.warning(f"JSON 檔案不存在: {file_path}")
+
+        # file_path is empty string or None
+        else:
+            logger.info("沒有提供 JSON 檔案")
         return {}
 
     def load_from_cli(self, args: dict[str, Any] | Namespace) -> dict[str, Any]:
