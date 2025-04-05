@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "動畫瘋彈幕過濾器",
+  "version": "1.0",
+  "description": "移除巴哈姆特動畫瘋指定的用戶的彈幕訊息",
+  "permissions": ["storage", "unlimitedStorage", "tabs"],
+  "content_scripts": [
+    {
+      "matches": ["https://ani.gamer.com.tw/animeVideo.php?sn=*"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["https://ani.gamer.com.tw/animeVideo.php?sn=*"],
+      "js": ["inject.js"],
+      "run_at": "document_start",
+      "world": "ISOLATED"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "options.html"
+}
