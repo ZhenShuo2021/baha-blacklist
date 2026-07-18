@@ -202,7 +202,9 @@ class GamerAPI(GamerLogin):
         consecutive_errors = 0
         total_users = len(uids)
 
-        self.logger.info(f"開始進行用戶 {category_mapping[category]} 操作，共 {total_users} 個用戶")
+        self.logger.info(
+            f"開始進行執行任務：'{category_mapping[category]}'，共 {total_users} 個用戶"
+        )
 
         for index, uid in enumerate(uids, 1):
             if should_skip(results):
