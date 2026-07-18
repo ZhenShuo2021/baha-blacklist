@@ -13,7 +13,7 @@ load_dotenv()
 @pytest.fixture
 def mock_config():
     config = Config()
-    config.browser = "chrome131"
+    config.browser = "chrome146"
     config.account = os.environ["BAHA_ACCOUNT"]
     config.password = os.environ["BAHA_PASSWORD"]
     config.cookies_first = True

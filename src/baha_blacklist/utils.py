@@ -1,15 +1,19 @@
 import argparse
 import base64
 import json
+import logging
 import os
 from datetime import datetime
 from typing import Any
 
 from curl_cffi.requests import Session
 
+logger = logging.getLogger("baha_blacklist")
+
 
 def load_users(source: str, session: Session) -> list[str]:
     """從黑名單列表中讀取用戶，來源可以是網路或者文件檔案"""
+    logger.info(f"開始從 {source} 讀取黑名單清單")
     if source.startswith(("http://", "https://")):
         response = session.get(source)
         response.raise_for_status()

@@ -24,8 +24,8 @@ class Config:
     min_visit: int = 5
     min_day: int = 1
     friend_num: int = 100
-    user_agent: str = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
-    browser: BrowserTypeLiteral = "chrome131"
+    user_agent: str = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
+    browser: BrowserTypeLiteral = "chrome146"
 
     def validate(self) -> None:
         # 別忘了修改 actions.py

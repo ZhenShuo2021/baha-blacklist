@@ -163,7 +163,7 @@ class GamerAPI(GamerLogin):
         if add_success_msg in result:
             self.logger.debug(f"用戶 {uid} {category_mapping[category]} 操作成功: {result}")
         else:
-            self.logger.info(f"用戶 {uid} {category_mapping[category]} 操作失敗: {result}")
+            self.logger.error(f"用戶 {uid} {category_mapping[category]} 操作失敗: {result}")
         return result
 
     def add_users(
@@ -202,7 +202,9 @@ class GamerAPI(GamerLogin):
         consecutive_errors = 0
         total_users = len(uids)
 
-        self.logger.info(f"開始進行用戶 {category_mapping[category]} 操作，共 {total_users} 個用戶")
+        self.logger.info(
+            f"開始進行執行任務：'{category_mapping[category]}'，共 {total_users} 個用戶"
+        )
 
         for index, uid in enumerate(uids, 1):
             if should_skip(results):
@@ -235,7 +237,7 @@ class GamerAPI(GamerLogin):
         page_mapping: dict[int, str] = {1: "好友", 2: "待確認", 3: "追蹤", 4: "追蹤者", 5: "黑名單"}
         acc, list_name = self.config.account, page_mapping[type_id]
         self.logger.info(f"開始讀取用戶 {acc} 的{list_name}清單")
-        url = f"https://home.gamer.com.tw/friendList.php?user={self.config.account}&t={type_id} "
+        url = f"https://home.gamer.com.tw/friendList.php?user={self.config.account}&t={type_id}"
 
         try:
             response = self.session.get(url)
@@ -247,6 +249,7 @@ class GamerAPI(GamerLogin):
                 return []
 
             self.logger.info(f"成功讀取清單，共 {len(user_ids)} 筆資料")
+            self.logger.debug(f"成功讀取清單：{user_ids}")
             return user_ids
         except Exception as e:
             self.logger.error(f"用戶 {acc} {list_name}清單讀取失敗: {e}")
@@ -298,7 +301,7 @@ class GamerAPI(GamerLogin):
 
     def _update_global_csrf(self) -> None:
         self.logger.debug("開始更新全域 CSRF Token")
-        url = "https://www.gamer.com.tw/ajax/get_csrf_token.php "
+        url = "https://www.gamer.com.tw/ajax/get_csrf_token.php"
         response = self.session.get(url)
         response.raise_for_status()
 

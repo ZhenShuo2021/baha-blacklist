@@ -52,7 +52,7 @@ def real_main(args: Namespace, config: Config, api: GamerAPIExtended) -> int:
         except RequestException as e:
             logger.error(f"黑名單來源讀取失敗: {e}")
             uids = []
-        if uids:
+        if any(uids):
             api.add_users(uids, existing_users, category="bad")
         else:
             logger.info("沒有更新黑名單，因為載入失敗或來源黑名單為空")
