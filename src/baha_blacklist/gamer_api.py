@@ -235,7 +235,7 @@ class GamerAPI(GamerLogin):
         page_mapping: dict[int, str] = {1: "好友", 2: "待確認", 3: "追蹤", 4: "追蹤者", 5: "黑名單"}
         acc, list_name = self.config.account, page_mapping[type_id]
         self.logger.info(f"開始讀取用戶 {acc} 的{list_name}清單")
-        url = f"https://home.gamer.com.tw/friendList.php?user={self.config.account}&t={type_id} "
+        url = f"https://home.gamer.com.tw/friendList.php?user={self.config.account}&t={type_id}"
 
         try:
             response = self.session.get(url)
@@ -298,7 +298,7 @@ class GamerAPI(GamerLogin):
 
     def _update_global_csrf(self) -> None:
         self.logger.debug("開始更新全域 CSRF Token")
-        url = "https://www.gamer.com.tw/ajax/get_csrf_token.php "
+        url = "https://www.gamer.com.tw/ajax/get_csrf_token.php"
         response = self.session.get(url)
         response.raise_for_status()
 
