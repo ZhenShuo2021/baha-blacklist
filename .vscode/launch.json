@@ -8,7 +8,7 @@
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
       "envFile": "${workspaceFolder}/.env",
-
+      "python": "${workspaceFolder}/.venv/bin/python",
       "justMyCode": true,
       "module": "baha_blacklist",
       "args": ["--mode", "export", "--cookies-first", "-v"]
