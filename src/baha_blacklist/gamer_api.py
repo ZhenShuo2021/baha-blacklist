@@ -163,7 +163,7 @@ class GamerAPI(GamerLogin):
         if add_success_msg in result:
             self.logger.debug(f"用戶 {uid} {category_mapping[category]} 操作成功: {result}")
         else:
-            self.logger.info(f"用戶 {uid} {category_mapping[category]} 操作失敗: {result}")
+            self.logger.error(f"用戶 {uid} {category_mapping[category]} 操作失敗: {result}")
         return result
 
     def add_users(
@@ -247,6 +247,7 @@ class GamerAPI(GamerLogin):
                 return []
 
             self.logger.info(f"成功讀取清單，共 {len(user_ids)} 筆資料")
+            self.logger.debug(f"成功讀取清單：{user_ids}")
             return user_ids
         except Exception as e:
             self.logger.error(f"用戶 {acc} {list_name}清單讀取失敗: {e}")
