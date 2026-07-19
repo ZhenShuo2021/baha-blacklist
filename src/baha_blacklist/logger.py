@@ -84,18 +84,3 @@ def suppress_log(level: int) -> None:
     level = logging.DEBUG if level == logging.DEBUG else logging.WARNING
     logging.getLogger("httpx").setLevel(level)
     logging.getLogger("httpcore").setLevel(level)
-
-
-if __name__ == "__main__":
-    # Set up logging
-    setup_logging(logging.DEBUG, "test_logger.log")
-
-    # Create a logger
-    logger = logging.getLogger(__name__)
-
-    # Log messages to test the configuration
-    logger.debug("Debug message")
-    logger.info("This is an info message.")
-    logger.warning("Warning message")
-    logger.error("This is an error message.")
-    logger.critical("Critical message")
