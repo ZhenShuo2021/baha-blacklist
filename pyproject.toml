@@ -3,17 +3,23 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "BAHA-blacklist"
+name = "baha-blacklist"
 version = "0.2.0"
 description = "巴哈姆特黑名單工具"
 readme = "README.md"
 requires-python = ">=3.10"
+license = "Unlicense"
 dependencies = [
     "colorama>=0.4.6",
     "curl-cffi>=0.15.0",
     "lxml>=5.3.0",
     "python-dotenv>=1.0.1",
 ]
+
+[project.urls]
+Homepage = "https://github.com/ZhenShuo2021/baha-blacklist"
+Repository = "https://github.com/ZhenShuo2021/baha-blacklist"
+Issues = "https://github.com/ZhenShuo2021/baha-blacklist/issues"
 
 [dependency-groups]
 dev = [
