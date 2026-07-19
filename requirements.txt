@@ -2,7 +2,6 @@
 #    uv pip compile pyproject.toml -o requirements.txt --annotation-style line
 certifi==2026.6.17        # via curl-cffi
 cffi==2.1.0               # via curl-cffi
-colorama==0.4.6           # via baha-blacklist (pyproject.toml)
 curl-cffi==0.15.0         # via baha-blacklist (pyproject.toml)
 lxml==6.1.1               # via baha-blacklist (pyproject.toml)
 markdown-it-py==4.2.0     # via rich

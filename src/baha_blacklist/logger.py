@@ -1,25 +1,36 @@
 import logging
 import os
+import sys
 from typing import ClassVar
 
-from colorama import Fore, Style, init
+
+def _enable_windows_ansi() -> None:
+    """在舊版 Windows cmd.exe 上啟用 ANSI escape code 支援。
+
+    Windows 10 build 16257 以後的終端機（含 Windows Terminal、PowerShell 7）
+    原生支援 ANSI，這裡只是確保較舊的 cmd.exe 也能顯示顏色。
+    """
+    if os.name == "nt":
+        os.system("")
 
 
 class CustomFormatter(logging.Formatter):
+    RESET = "\033[0m"
+    GREEN = "\033[32m"
+
     COLORS: ClassVar[dict[int, str]] = {
-        logging.DEBUG: Fore.LIGHTBLACK_EX,
-        logging.INFO: Fore.WHITE,
-        logging.WARNING: Fore.YELLOW,
-        logging.ERROR: Fore.RED,
-        logging.CRITICAL: Fore.RED + Style.BRIGHT,
+        logging.DEBUG: "\033[90m",  # 亮黑（灰）
+        logging.INFO: "\033[37m",  # 白
+        logging.WARNING: "\033[33m",  # 黃
+        logging.ERROR: "\033[31m",  # 紅
+        logging.CRITICAL: "\033[31m\033[1m",  # 紅 + 粗體
     }
-    GREEN = Fore.GREEN
-    RESET = Style.RESET_ALL
 
     def __init__(self, use_color: bool = True) -> None:
         super().__init__()
-        init()
-        self.use_color = use_color
+        self.use_color = use_color and sys.stdout.isatty()
+        if self.use_color:
+            _enable_windows_ansi()
 
     def format(self, record: logging.LogRecord) -> str:
         if self.use_color:
