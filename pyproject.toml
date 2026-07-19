@@ -65,10 +65,6 @@ target-version = "py310"
 docstring-code-format = true
 quote-style = "double"
 
-[tool.ruff.lint.per-file-ignores]
-"v2dl/cli/account_cli.py" = ["T201"]
-"v2dl/utils/security.py" = ["T201"]
-
 [tool.ruff.lint]
 explicit-preview-rules = true
 allowed-confusables = ["，", "。", "（", "）"]
