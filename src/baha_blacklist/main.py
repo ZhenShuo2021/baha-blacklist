@@ -24,7 +24,7 @@ def init_app(args: Namespace, config_name: str = "config.json") -> tuple[Config,
         loglevel = logging.WARNING
 
     setup_logging(loglevel)
-    json_path = str(Path(__file__).parents[2] / config_name)
+    json_path = str(Path.cwd() / config_name)
     config_loader = ConfigLoader(Config())
     config = config_loader.load_config(json_path, args)
 
